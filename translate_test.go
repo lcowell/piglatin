@@ -37,3 +37,10 @@ func TestTranslate(t *testing.T) {
 	}
 
 }
+
+func TestTranslateMultiple(t *testing.T) {
+        expected := []string{"atcay", "eggday"}
+        actual := TranslateMultiple("cat", "egg")
+
+        assert.Equal(t, expected, actual)
+}

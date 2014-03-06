@@ -10,6 +10,13 @@ const (
 	firstLetterExceptionSuffix string = "d" + pigLatinSuffix
 )
 
+func TranslateMultiple(in ...string) (results []string) {
+        for _, word := range in {
+                results = append(results, Translate(word))
+        }
+        return
+}
+
 // Translate translates an English word into Pig latin.
 func Translate(in string) string {
 	first := in[0:1]
