@@ -1,7 +1,8 @@
 package piglatin
 
 import (
-	"strings"
+        "io"
+        "strings"
 )
 
 const (
@@ -25,4 +26,26 @@ func Translate(in string) string {
 	} else {
 		return in[1:] + first + pigLatinSuffix
 	}
+}
+
+type Writer struct {
+        w io.Writer
+}
+
+func NewWriter(w io.Writer) *Writer {
+
+        return &Writer{w: w}
+}
+
+func (w *Writer) Write(p []byte) (n int, err error) {
+        words := strings.Split(string(p), " ")
+        wordIndex := len(words) - 1
+
+        for n, word := range words {
+                w.w.Write([]byte(Translate(word)))
+                if n < wordIndex {
+                        w.w.Write([]byte(" "))
+                }
+        }
+        return
 }

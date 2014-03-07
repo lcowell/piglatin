@@ -1,8 +1,9 @@
 package piglatin
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+        "bytes"
+        "github.com/stretchr/testify/assert"
+        "testing"
 )
 
 var translateTests = []struct {
@@ -43,4 +44,12 @@ func TestTranslateMultiple(t *testing.T) {
         actual := TranslateMultiple("cat", "egg")
 
         assert.Equal(t, expected, actual)
+}
+
+func TestWriter(t *testing.T) {
+        var b bytes.Buffer
+        pigWriter := NewWriter(&b)
+        pigWriter.Write([]byte("hat egg"))
+
+        assert.Equal(t, "athay eggday", string(b.Bytes()))
 }
